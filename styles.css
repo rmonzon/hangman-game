@@ -1,0 +1,109 @@
+body, html {
+    margin: 0;
+    font-family: Verdana;
+}
+
+.main-container {
+    padding: 0 25px;
+    max-width: 70%;
+    margin: 0 auto;
+}
+
+.top-container {
+    display: flex;
+    margin: auto;
+}
+
+.bottom-container {
+    
+}
+
+.left-rail-container {
+    width: 60%;
+}
+
+.right-rail-container {
+    width: 40%;
+    text-align: right;
+    padding: 25px;
+}
+
+.right-rail-container p {
+    margin: 0 0 10px 0;
+} 
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding: 10px;
+    background-color: #758fc2;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.keyboard-btns-container {
+    text-align: center;
+}
+
+.letter-btn__base {
+	-moz-box-shadow: 0 0 9px 0 #9fb4f2;
+	-webkit-box-shadow: 0 0 9px 0 #9fb4f2;
+	box-shadow: 0 0 9px 0 #9fb4f2;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
+    text-shadow: 0 1px 20px #283966;
+    margin: 10px;
+    text-transform: capitalize;
+    width: 40px;
+    height: 40px;
+    outline: none;
+}
+
+.letter-btn__status--normal {
+    background-color: #7892c2;
+    border: 1px solid #4e6096;
+}
+
+.letter-btn__status--normal:hover {
+    background-color: #476e9e;
+}
+
+.letter-btn__status--normal:active {
+	position: relative;
+    top: 1px;
+}
+
+.letter-btn__status--green {
+    background-color: #03cc03;
+    border: 1px solid #03cc03;
+    cursor: default;
+}
+
+.letter-btn__status--red {
+    background-color: red;
+    border: 1px solid red;
+    cursor: default;
+}
+
+.word-placeholder-container {
+    text-align: center;
+    margin: 10px auto 35px auto;
+}
+
+.letter-placeholder {
+    margin: 10px;
+    font-size: 40px;
+    text-transform: capitalize;
+}
+
+.btn-hint {
+    
+}
