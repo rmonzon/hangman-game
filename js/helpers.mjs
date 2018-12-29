@@ -14,8 +14,18 @@ export function calculateHints(numberOfLetters) {
 /**
  * Makes a call to the API and fetches the list of words to pick from
  */
-export function fetchWords() {
+export function fetchWords(difficulty) {
     // here we'll fetch the words and randomly select one
+    const URL = "http://app.linkedin-reach.io/words";
+    const endPointUrl = (difficulty) ? URL.concat(`?difficulty=${difficulty}`) : URL;
+
+    fetch(endPointUrl, {
+      method: "GET"
+    })
+    .then(response => {
+        const words = response.text();
+        console.log(words);
+    })
     return 'california';
 }
 
@@ -63,5 +73,5 @@ export function createWordPlaceholder(word, wordPlaceholder) {
  */
 export function getRandomNumber(min, max) {
     var randomFloat = Math.random() * (max - min) + min;
-    return Math.floor(randomFloat); 
+    return Math.floor(randomFloat);
 }

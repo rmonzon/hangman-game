@@ -22,22 +22,6 @@ let numberOfHints = 0;
 let lettersGuessed = [];
 let numIncorrectGuesses = 0;
 
-document.addEventListener("DOMContentLoaded", function(event) {
-    btnsContainerHTML = document.querySelector('.keyboard-btns-container');
-    wordPlaceholderContainerHTML = document.querySelector('.word-placeholder-container');
-    incorrectGuessesHTML = document.querySelector('#incorrectGuesses');
-    hangmanProgressImgHTML = document.querySelector('#hangmanProgressImg');
-    hintButtonHTML = document.querySelector('.btn-hint');
-    hintsLabelHTML = document.querySelector('#hints');
-    hintButtonHTML.onclick = hintButtonClickHandler;
-    createKeyboard();
-    word = fetchWords();
-    wordLength = word.length;
-    numberOfHints = calculateHints(wordLength);
-    hintsLabelHTML.innerHTML = `0 / ${numberOfHints}`;
-    createWordPlaceholder(word, wordPlaceholderContainerHTML);
-});
-
 /**
  * Dynamically creates english alphabet letters as buttons and appends them to the DOM
  */
@@ -61,6 +45,7 @@ function letterOnClickHandler(event) {
     btn.classList.remove('letter-btn__status--normal');
     if (isGameOver(numIncorrectGuesses)) {
         // game over!
+        resetGame();
     } else {
         if (word.includes(letter)) {
             // letter guessed!
@@ -70,7 +55,7 @@ function letterOnClickHandler(event) {
         } else {
             // wrong guess!
             numIncorrectGuesses++;
-            incorrectGuessesHTML.innerHTML = `${numIncorrectGuesses} / ${6}`;
+            setIncorrectGuess(numIncorrectGuesses);
             btn.classList.add('letter-btn__status--red');
             hangmanProgressImgHTML.src = `images/Hangman-${numIncorrectGuesses}.png`;
         }
@@ -87,7 +72,47 @@ function hintButtonClickHandler(event) {
             uncoverLetters(word, wordPlaceholderContainerHTML.children, word[i]);
             hintsSoFar++;
             hintsLabelHTML.innerHTML = `${hintsSoFar} / ${numberOfHints}`;
+            numIncorrectGuesses--;
+            setIncorrectGuess(numIncorrectGuesses);
             break;
         }
     }
 }
+
+/**
+ * Sets the value of the incorrect guesses HTML element
+ * @param {Number} currentValue - current incorrect guess value
+ */
+function setIncorrectGuess(currentValue) {
+    incorrectGuessesHTML.innerHTML = `${currentValue} / ${6}`;
+}
+
+/**
+ * Resets all values of the game and starts a new one
+ */
+function resetGame() {
+
+}
+
+/**
+ * Initializes all variables that manipulate the DOM
+ */
+function initHTMLVariables() {
+    btnsContainerHTML = document.querySelector('.keyboard-btns-container');
+    wordPlaceholderContainerHTML = document.querySelector('.word-placeholder-container');
+    incorrectGuessesHTML = document.querySelector('#incorrectGuesses');
+    hangmanProgressImgHTML = document.querySelector('#hangmanProgressImg');
+    hintButtonHTML = document.querySelector('.btn-hint');
+    hintsLabelHTML = document.querySelector('#hints');
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    initHTMLVariables();
+    hintButtonHTML.onclick = hintButtonClickHandler;
+    createKeyboard();
+    word = fetchWords(1);
+    wordLength = word.length;
+    numberOfHints = calculateHints(wordLength);
+    hintsLabelHTML.innerHTML = `0 / ${numberOfHints}`;
+    createWordPlaceholder(word, wordPlaceholderContainerHTML);
+});
